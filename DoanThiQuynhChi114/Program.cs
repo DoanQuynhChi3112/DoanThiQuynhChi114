@@ -1,9 +1,14 @@
+using DoanThiQuynhChi114.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+builder.Services.AddDbContext<ApplicationDbcontext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
